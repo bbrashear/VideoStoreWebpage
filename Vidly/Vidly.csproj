@@ -211,9 +211,14 @@
     <Compile Include="Migrations\202011191453406_ApplyAnnotationsToMembershipTypeName.Designer.cs">
       <DependentUpon>202011191453406_ApplyAnnotationsToMembershipTypeName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011191512494_AddMovies.cs" />
+    <Compile Include="Migrations\202011191512494_AddMovies.Designer.cs">
+      <DependentUpon>202011191512494_AddMovies.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
@@ -325,6 +330,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011191453406_ApplyAnnotationsToMembershipTypeName.resx">
       <DependentUpon>202011191453406_ApplyAnnotationsToMembershipTypeName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011191512494_AddMovies.resx">
+      <DependentUpon>202011191512494_AddMovies.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
