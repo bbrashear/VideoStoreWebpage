@@ -75,7 +75,7 @@ namespace Vidly.Controllers
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
 
             if (customer == null)
-                HttpNotFound();
+                return HttpNotFound();
 
             var viewModel = new CustomerFormViewModel
             {
