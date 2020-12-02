@@ -38,7 +38,7 @@ namespace Vidly.Controllers.Api
         [HttpPost]
         public Customer CreateCustomer(Customer customer)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
             _context.Customers.Add(customer);
