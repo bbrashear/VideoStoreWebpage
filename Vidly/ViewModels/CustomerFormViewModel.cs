@@ -11,5 +11,14 @@ namespace Vidly.ViewModels
     {
         public IEnumerable<MembershipType> MembershipTypes { get; set; }
         public Customer Customer { get; set; }
+
+        //if id is find, title of page will be "Edit Customer", otherwise will be "New Customer"
+        public string Title
+        {
+            get
+            {
+                return (Customer.Id != 0) ? "Edit Customer" : "New Customer";
+            }
+        }
     }
 }
