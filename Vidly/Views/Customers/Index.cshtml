@@ -25,6 +25,8 @@
 @section scripts
 {
     <script>
+        //uses DataTable plugin to call customers api
+        //first column is customer name linked to edit method in CustomersController api, last column is delete button
         $(document).ready(function () {
             var table = $("#customers").DataTable({
                 ajax: {
@@ -50,7 +52,7 @@
                 ]
             });
 
-
+            //delete button comment before deletion, calls the Delete method in CustomersController api, and removes table row after action
             $("#customers").on("click", ".js-delete", function () {
                 var button = $(this);
 

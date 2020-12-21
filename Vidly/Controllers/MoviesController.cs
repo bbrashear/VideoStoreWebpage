@@ -22,21 +22,30 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
+        //limits access to only specific users
         [Authorize(Roles = RoleName.CanManageMovies)]
         public ViewResult New()
         {
+            //gets genres from database
             var genres = _context.Genres.ToList();
+
+            //creates viewModel for movie
             var viewModel = new MovieFormViewModel
             {
                 Genres = genres
             };
+
+            //returns MovieForm view with viewModel in the fields
             return View("MovieForm", viewModel);
         }
 
         [HttpPost]
+        //AntiForgeryToken prevents Cross-Site Request Forgery for sensitive actions
         [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
+            //if ModelState is valid, creates new viewModel for movie and returns MovieForm View
+
             if (!ModelState.IsValid)
             {
                 var viewModel = new MovieFormViewModel(movie)
@@ -46,6 +55,8 @@ namespace Vidly.Controllers
 
                 return View("MovieForm", viewModel);
             }
+
+            //adds new movie to database if Id not found and sets DateAdded, otherwise updates movie information edited and saves changes to database
             if (movie.Id == 0)
             {
                 movie.DateAdded = DateTime.Now;
@@ -64,29 +75,34 @@ namespace Vidly.Controllers
 
             _context.SaveChanges();
 
+            //returns "home page" of movies
             return RedirectToAction("Index", "Movies");
         }
 
         // GET: Movies
         public ViewResult Index()
         {
+            //List view allows edit and new actions for approved users
             if (User.IsInRole(RoleName.CanManageMovies))
                 return View("List");
 
-            
+            //ReadOnlyList view only provides list of movies with details action
             return View("ReadOnlyList");
         }
 
         public ActionResult Details(int id)
         {
+            //gets movie from database
             var movie = _context.Movies.Include(m => m.Genre).SingleOrDefault(m => m.Id == id);
 
+            //error handling
             if (movie == null)
-                HttpNotFound();
+                return HttpNotFound();
 
             return View(movie);
         }
         //GET: Movies/Random
+        //creates a hard coded "random" movie, more of a practice action
         public ActionResult Random()
         {
             var movie = new Movie { Name = "Inception" };
@@ -104,19 +120,25 @@ namespace Vidly.Controllers
             return View(viewModel);
         }
 
+        //limits access to only specific users
+
         [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
+            //gets specific movie from database
             var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
 
+            //error handling
             if (movie == null)
                 return HttpNotFound();
 
+            //creates new viewModel for movie
             var viewModel = new MovieFormViewModel(movie)
             {
                 Genres = _context.Genres.ToList()
             };
 
+            //returns MovieForm view with viewModel in the fields
             return View("MovieForm", viewModel);
         }
     }

@@ -6,6 +6,7 @@
 }
 
 <h2>Movies</h2>
+<!--link to New method in Movies controller-->
 <p>
     @Html.ActionLink("New Movie", "New", "Movies", null, new { @class = "btn btn-primary" })
 </p>
@@ -24,6 +25,8 @@
 @section scripts
 {
     <script>
+         //uses DataTable plugin to call movies api
+        //first column is movie name linked to edit method in MoviesController api, last column is delete button
         $(document).ready(function () {
             var table = $("#movies").DataTable({
                 ajax: {
@@ -49,6 +52,7 @@
                 ]
             });
 
+            //delete button comment before deletion, calls the Delete method in MoviesController api, and removes table row after action
             $("#movies").on("click", ".js-delete", function () {
                 var button = $(this);
 

@@ -6,6 +6,7 @@ using Vidly.Models;
 
 namespace Vidly.ViewModels
 {
+    //viewModel allows us to pass multiple models to the view, in this case Customers and MembershipTypes
     public class CustomerFormViewModel
     {
         public IEnumerable<MembershipType> MembershipTypes { get; set; }

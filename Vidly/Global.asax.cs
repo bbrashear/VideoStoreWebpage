@@ -15,8 +15,11 @@ namespace Vidly
     {
         protected void Application_Start()
         {
+            //configuration for automapper
             Mapper.Initialize(c => c.AddProfile<MappingProfile>());
+            //configuration for web api
             GlobalConfiguration.Configure(WebApiConfig.Register);
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

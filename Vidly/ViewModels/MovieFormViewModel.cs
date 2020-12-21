@@ -9,6 +9,7 @@ namespace Vidly.ViewModels
 {
     public class MovieFormViewModel
     {
+        //viewModel allows us to pass multiple models to the view, in this case Movies and Genres
         public IEnumerable<Genre> Genres { get; set; }
         public int? Id { get; set; }
 
@@ -28,6 +29,8 @@ namespace Vidly.ViewModels
         [Range(1, 20)]
         [Required]
         public byte? NumberInStock { get; set; }
+        
+        //if id is find, title of page will be "Edit Movie", otherwise will be "New Movie"
         public string Title
         {
             get
@@ -36,11 +39,13 @@ namespace Vidly.ViewModels
             }
         }
 
+        //if no movie is passed, constructor sets id to 0 to avoid error message
         public MovieFormViewModel()
         {
             Id = 0;
         }
 
+        //if movie object is passed to viewModel, constructor correlates properties
         public MovieFormViewModel(Movie movie)
         {
             Id = movie.Id;

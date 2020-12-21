@@ -41,6 +41,7 @@
                 movieIds: []
             };
 
+            //Copy and paste from Twitter typeahead plugin with changes to relevant variables
             var customers = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -61,6 +62,7 @@
                 vm.customerId = customer.id;
             });
 
+            //Copy and paste from Twitter typeahead plugin with changes to relevant variables
             var movies = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -85,14 +87,19 @@
                 vm.movieIds.push(movie.id);
             });
 
+            //jQuery validation to make sure customer is selected before form is submitted
             $.validator.addMethod("validCustomer", function () {
                 return vm.customerId && vm.customerId !== 0;
             }, "Please select a valid customer.");
 
+            //jQuery validation to make sure at least one movie is selected before form is submitted
             $.validator.addMethod("atLeastOneMovie", function () {
                 return vm.movieIds.length > 0;
             }, "Please select at least one movie.");
 
+            //if form is able to be submitted successfully, NewRentalController api is called, 
+            //success toastr notification pops up and form resets,
+            //otherwise fail toastr notification presents
             var validator = $("#newRental").validate({
                 submitHandler: function () {
                     $.ajax({
